@@ -2,8 +2,12 @@
 
 // MIT license
 
-#include <WProgram.h>
-#include <Wire.h>
+#if (ARDUINO >= 100)
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
+#include "Wire.h"
 
 #define BMP085_DEBUG 0
 
