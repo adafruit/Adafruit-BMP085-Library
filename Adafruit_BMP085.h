@@ -1,6 +1,18 @@
-// BMP085 Pressure/Temperature (Altimeter) sensor
+/*************************************************** 
+  This is a library for the BMP085 Barometric Pressure & Temp Sensor
 
-// MIT license
+  Designed specifically to work with the Adafruit BMP085 Breakout 
+  ----> https://www.adafruit.com/products/391
+
+  These displays use I2C to communicate, 2 pins are required to  
+  interface
+  Adafruit invests time and resources providing this open source code, 
+  please support Adafruit and open-source hardware by purchasing 
+  products from Adafruit!
+
+  Written by Limor Fried/Ladyada for Adafruit Industries.  
+  BSD license, all text above must be included in any redistribution
+ ****************************************************/
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -36,9 +48,9 @@
 #define BMP085_READPRESSURECMD            0x34
 
 
-class BMP085 {
+class Adafruit_BMP085 {
  public:
-  BMP085();
+  Adafruit_BMP085();
   void begin(uint8_t mode = BMP085_ULTRAHIGHRES);  // by default go highres
   float readTemperature(void);
   int32_t readPressure(void);
