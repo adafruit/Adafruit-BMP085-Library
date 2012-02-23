@@ -83,9 +83,13 @@ uint32_t Adafruit_BMP085::readRawPressure(void) {
     _delay_ms(26);
 
   raw = read16(BMP085_PRESSUREDATA);
-  raw <<= 8;
-  raw |= read8(BMP085_PRESSUREDATA+2);
-  raw >>= (8 - oversampling);
+
+  if (oversampling==0) {
+    raw <<= 8;
+    raw |= read8(BMP085_PRESSUREDATA+2);
+    raw >>= (8 - oversampling);
+  }
+
 #if BMP085_DEBUG == 1
   Serial.print("Raw pressure: "); Serial.println(raw);
 #endif
@@ -159,7 +163,7 @@ int32_t Adafruit_BMP085::readPressure(void) {
   if (B7 < 0x80000000) {
     p = (B7 * 2) / B4;
   } else {
-    p = (B7 * 2) / B3;
+    p = (B7 / B4) * 2;
   }
   X1 = (p >> 8) * (p >> 8);
   X1 = (X1 * 3038) >> 16;
