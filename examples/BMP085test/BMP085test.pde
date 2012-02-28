@@ -24,7 +24,7 @@
 // EOC is not used, it signifies an end of conversion
 // XCLR is a reset pin, also not used here
 
-BMP085 bmp;
+Adafruit_BMP085 bmp;
   
 void setup() {
   Serial.begin(9600);
