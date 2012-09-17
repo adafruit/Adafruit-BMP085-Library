@@ -21,12 +21,14 @@ Adafruit_BMP085::Adafruit_BMP085() {
 }
 
 
-void Adafruit_BMP085::begin(uint8_t mode) {
+boolean Adafruit_BMP085::begin(uint8_t mode) {
   if (mode > BMP085_ULTRAHIGHRES) 
     mode = BMP085_ULTRAHIGHRES;
   oversampling = mode;
 
   Wire.begin();
+
+  if (read8(0xD0) != 0x55) return false;
 
   /* read calibration data */
   ac1 = read16(BMP085_CAL_AC1);

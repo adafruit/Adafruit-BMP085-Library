@@ -51,7 +51,7 @@
 class Adafruit_BMP085 {
  public:
   Adafruit_BMP085();
-  void begin(uint8_t mode = BMP085_ULTRAHIGHRES);  // by default go highres
+  boolean begin(uint8_t mode = BMP085_ULTRAHIGHRES);  // by default go highres
   float readTemperature(void);
   int32_t readPressure(void);
   float readAltitude(float sealevelPressure = 101325); // std atmosphere
