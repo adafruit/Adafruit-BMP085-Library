@@ -14,6 +14,9 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
+#ifndef ADAFRUIT_BMP085_H
+#define ADAFRUIT_BMP085_H
+
 #if (ARDUINO >= 100)
  #include "Arduino.h"
 #else
@@ -69,3 +72,5 @@ class Adafruit_BMP085 {
   uint16_t ac4, ac5, ac6;
 };
 
+
+#endif //  ADAFRUIT_BMP085_H
