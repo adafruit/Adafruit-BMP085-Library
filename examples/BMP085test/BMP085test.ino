@@ -49,6 +49,10 @@ void loop() {
     Serial.print(bmp.readAltitude());
     Serial.println(" meters");
 
+    Serial.print("Pressure at sealevel (calculated) = ");
+    Serial.print(bmp.readSealevelPressure());
+    Serial.println(" Pa");
+
   // you can get a more precise measurement of altitude
   // if you know the current sea level pressure which will
   // vary with weather and such. If it is 1015 millibars

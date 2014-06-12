@@ -195,6 +195,10 @@ int32_t Adafruit_BMP085::readPressure(void) {
   return p;
 }
 
+int32_t Adafruit_BMP085::readSealevelPressure(float altitude_meters) {
+  float pressure = readPressure();
+  return (int32_t)(pressure / pow(1.0-altitude_meters/44330, 5.255));
+}
 
 float Adafruit_BMP085::readTemperature(void) {
   int32_t UT, B5;     // following ds convention
