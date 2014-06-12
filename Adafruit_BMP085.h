@@ -63,6 +63,7 @@ class Adafruit_BMP085 {
   uint32_t readRawPressure(void);
   
  private:
+  int32_t computeB5(int32_t UT);
   uint8_t read8(uint8_t addr);
   uint16_t read16(uint8_t addr);
   void write8(uint8_t addr, uint8_t data);

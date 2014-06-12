@@ -64,6 +64,12 @@ boolean Adafruit_BMP085::begin(uint8_t mode) {
   return true;
 }
 
+int32_t Adafruit_BMP085::computeB5(int32_t UT) {
+  int32_t X1 = (UT - (int32_t)ac6) * ((int32_t)ac5) >> 15;
+  int32_t X2 = ((int32_t)mc << 11) / (X1+(int32_t)md);
+  return X1 + X2;
+}
+
 uint16_t Adafruit_BMP085::readRawTemperature(void) {
   write8(BMP085_CONTROL, BMP085_READTEMPCMD);
   _delay_ms(5);
@@ -132,10 +138,7 @@ int32_t Adafruit_BMP085::readPressure(void) {
   oversampling = 0;
 #endif
 
-  // do temperature calculations
-  X1=(UT-(int32_t)(ac6))*((int32_t)(ac5))/pow(2,15);
-  X2=((int32_t)mc*pow(2,11))/(X1+(int32_t)md);
-  B5=X1 + X2;
+  B5 = computeB5(UT);
 
 #if BMP085_DEBUG == 1
   Serial.print("X1 = "); Serial.println(X1);
@@ -194,7 +197,7 @@ int32_t Adafruit_BMP085::readPressure(void) {
 
 
 float Adafruit_BMP085::readTemperature(void) {
-  int32_t UT, X1, X2, B5;     // following ds convention
+  int32_t UT, B5;     // following ds convention
   float temp;
 
   UT = readRawTemperature();
@@ -208,11 +211,8 @@ float Adafruit_BMP085::readTemperature(void) {
   md = 2868;
 #endif
 
-  // step 1
-  X1 = (UT - (int32_t)ac6) * ((int32_t)ac5) / pow(2,15);
-  X2 = ((int32_t)mc * pow(2,11)) / (X1+(int32_t)md);
-  B5 = X1 + X2;
-  temp = (B5+8)/pow(2,4);
+  B5 = computeB5(UT);
+  temp = (B5+8) >> 4;
   temp /= 10;
   
   return temp;
