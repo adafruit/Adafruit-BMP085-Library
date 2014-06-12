@@ -60,6 +60,8 @@ boolean Adafruit_BMP085::begin(uint8_t mode) {
   Serial.print("mc = "); Serial.println(mc, DEC);
   Serial.print("md = "); Serial.println(md, DEC);
 #endif
+
+  return true;
 }
 
 uint16_t Adafruit_BMP085::readRawTemperature(void) {
