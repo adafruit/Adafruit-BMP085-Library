@@ -54,7 +54,8 @@
 
 class Adafruit_BMP085 {
  public:
-  Adafruit_BMP085();
+  int address;
+  Adafruit_BMP085(int _address = BMP085_I2CADDR);
   boolean begin(uint8_t mode = BMP085_ULTRAHIGHRES);  // by default go highres
   float readTemperature(void);
   int32_t readPressure(void);

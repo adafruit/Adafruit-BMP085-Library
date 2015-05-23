@@ -17,7 +17,8 @@
 
 #include "Adafruit_BMP085.h"
 
-Adafruit_BMP085::Adafruit_BMP085() {
+Adafruit_BMP085::Adafruit_BMP085(int _address) {
+  address = _address;
 }
 
 
@@ -237,7 +238,7 @@ float Adafruit_BMP085::readAltitude(float sealevelPressure) {
 uint8_t Adafruit_BMP085::read8(uint8_t a) {
   uint8_t ret;
 
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+  Wire.beginTransmission(address); // start transmission to device 
 #if (ARDUINO >= 100)
   Wire.write(a); // sends register address to read from
 #else
@@ -245,8 +246,8 @@ uint8_t Adafruit_BMP085::read8(uint8_t a) {
 #endif
   Wire.endTransmission(); // end transmission
   
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
-  Wire.requestFrom(BMP085_I2CADDR, 1);// send data n-bytes read
+  Wire.beginTransmission(address); // start transmission to device 
+  Wire.requestFrom(address, 1);// send data n-bytes read
 #if (ARDUINO >= 100)
   ret = Wire.read(); // receive DATA
 #else
@@ -260,7 +261,7 @@ uint8_t Adafruit_BMP085::read8(uint8_t a) {
 uint16_t Adafruit_BMP085::read16(uint8_t a) {
   uint16_t ret;
 
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+  Wire.beginTransmission(address); // start transmission to device 
 #if (ARDUINO >= 100)
   Wire.write(a); // sends register address to read from
 #else
@@ -268,8 +269,8 @@ uint16_t Adafruit_BMP085::read16(uint8_t a) {
 #endif
   Wire.endTransmission(); // end transmission
   
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
-  Wire.requestFrom(BMP085_I2CADDR, 2);// send data n-bytes read
+  Wire.beginTransmission(address); // start transmission to device 
+  Wire.requestFrom(address, 2);// send data n-bytes read
 #if (ARDUINO >= 100)
   ret = Wire.read(); // receive DATA
   ret <<= 8;
@@ -285,7 +286,7 @@ uint16_t Adafruit_BMP085::read16(uint8_t a) {
 }
 
 void Adafruit_BMP085::write8(uint8_t a, uint8_t d) {
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+  Wire.beginTransmission(address); // start transmission to device 
 #if (ARDUINO >= 100)
   Wire.write(a); // sends register address to read from
   Wire.write(d);  // write data
