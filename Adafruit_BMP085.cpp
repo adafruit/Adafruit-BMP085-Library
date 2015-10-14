@@ -196,7 +196,10 @@ int32_t Adafruit_BMP085::readPressure(void) {
 
 int32_t Adafruit_BMP085::readSealevelPressure(float altitude_meters) {
   float pressure = readPressure();
-  return (int32_t)(pressure / pow(1.0-altitude_meters/44330, 5.255));
+  // return (int32_t)(pressure / pow(1.0-altitude_meters/44330, 5.255));
+  // Pow is not compatible with ESP8266 Arduino IDE. This is a workaround
+  // See http://stackoverflow.com/questions/4985221/how-will-you-implement-powa-b-in-c-condition-follows
+  return (int32_t)(pressure / exp(5.255 * log(1.0-altitude_meters/44330)));
 }
 
 float Adafruit_BMP085::readTemperature(void) {
@@ -225,8 +228,11 @@ float Adafruit_BMP085::readAltitude(float sealevelPressure) {
   float altitude;
 
   float pressure = readPressure();
-
-  altitude = 44330 * (1.0 - pow(pressure /sealevelPressure,0.1903));
+  
+  // altitude = 44330 * (1.0 - pow(pressure /sealevelPressure,0.1903));
+  // Pow is not compatible with ESP8266 Arduino IDE. This is a workaround
+  // See http://stackoverflow.com/questions/4985221/how-will-you-implement-powa-b-in-c-condition-follows
+  altitude = 44330 * (1.0 - exp(0.1903 * log(pressure /sealevelPressure)));
 
   return altitude;
 }
