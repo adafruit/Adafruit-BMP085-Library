@@ -1,32 +1,42 @@
-/*************************************************** 
+/***************************************************
   This is a library for the Adafruit BMP085/BMP180 Barometric Pressure + Temp sensor
 
-  Designed specifically to work with the Adafruit BMP085 or BMP180 Breakout 
+  Designed specifically to work with the Adafruit BMP085 or BMP180 Breakout
   ----> http://www.adafruit.com/products/391
   ----> http://www.adafruit.com/products/1603
 
-  These displays use I2C to communicate, 2 pins are required to  
+  These displays use I2C to communicate, 2 pins are required to
   interface
-  Adafruit invests time and resources providing this open source code, 
-  please support Adafruit and open-source hardware by purchasing 
+  Adafruit invests time and resources providing this open source code,
+  please support Adafruit and open-source hardware by purchasing
   products from Adafruit!
 
-  Written by Limor Fried/Ladyada for Adafruit Industries.  
+  Written by Limor Fried/Ladyada for Adafruit Industries.
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
 #include "Adafruit_BMP085.h"
 
+Adafruit_BMP085::Adafruit_BMP085(uint8_t sda, uint8_t scl) {
+  _sda = sda;
+  _scl = scl;
+}
 Adafruit_BMP085::Adafruit_BMP085() {
+  _sda = -1;
+  _scl = -1;
 }
 
 
 boolean Adafruit_BMP085::begin(uint8_t mode) {
-  if (mode > BMP085_ULTRAHIGHRES) 
+  if (mode > BMP085_ULTRAHIGHRES)
     mode = BMP085_ULTRAHIGHRES;
   oversampling = mode;
 
-  Wire.begin();
+  if(_sda != -1 && _scl != -1){
+    Wire.begin(_sda,_scl);
+  }else{
+    Wire.begin();
+  }
 
   if (read8(0xD0) != 0x55) return false;
 
@@ -83,13 +93,13 @@ uint32_t Adafruit_BMP085::readRawPressure(void) {
 
   write8(BMP085_CONTROL, BMP085_READPRESSURECMD + (oversampling << 6));
 
-  if (oversampling == BMP085_ULTRALOWPOWER) 
+  if (oversampling == BMP085_ULTRALOWPOWER)
     delay(5);
-  else if (oversampling == BMP085_STANDARD) 
+  else if (oversampling == BMP085_STANDARD)
     delay(8);
-  else if (oversampling == BMP085_HIGHRES) 
+  else if (oversampling == BMP085_HIGHRES)
     delay(14);
-  else 
+  else
     delay(26);
 
   raw = read16(BMP085_PRESSUREDATA);
@@ -217,7 +227,7 @@ float Adafruit_BMP085::readTemperature(void) {
   B5 = computeB5(UT);
   temp = (B5+8) >> 4;
   temp /= 10;
-  
+
   return temp;
 }
 
@@ -237,15 +247,15 @@ float Adafruit_BMP085::readAltitude(float sealevelPressure) {
 uint8_t Adafruit_BMP085::read8(uint8_t a) {
   uint8_t ret;
 
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device
 #if (ARDUINO >= 100)
   Wire.write(a); // sends register address to read from
 #else
   Wire.send(a); // sends register address to read from
 #endif
   Wire.endTransmission(); // end transmission
-  
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+
+  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device
   Wire.requestFrom(BMP085_I2CADDR, 1);// send data n-bytes read
 #if (ARDUINO >= 100)
   ret = Wire.read(); // receive DATA
@@ -260,15 +270,15 @@ uint8_t Adafruit_BMP085::read8(uint8_t a) {
 uint16_t Adafruit_BMP085::read16(uint8_t a) {
   uint16_t ret;
 
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device
 #if (ARDUINO >= 100)
   Wire.write(a); // sends register address to read from
 #else
   Wire.send(a); // sends register address to read from
 #endif
   Wire.endTransmission(); // end transmission
-  
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+
+  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device
   Wire.requestFrom(BMP085_I2CADDR, 2);// send data n-bytes read
 #if (ARDUINO >= 100)
   ret = Wire.read(); // receive DATA
@@ -285,7 +295,7 @@ uint16_t Adafruit_BMP085::read16(uint8_t a) {
 }
 
 void Adafruit_BMP085::write8(uint8_t a, uint8_t d) {
-  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device 
+  Wire.beginTransmission(BMP085_I2CADDR); // start transmission to device
 #if (ARDUINO >= 100)
   Wire.write(a); // sends register address to read from
   Wire.write(d);  // write data
