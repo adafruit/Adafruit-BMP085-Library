@@ -153,8 +153,8 @@ int32_t Adafruit_BMP085::readPressure(void) {
   //UT = readRawTemperature();
   //UP = readRawPressure();
   heartBeat();
-  while(micros()-lastT > 50000) heartBeat(); // Make sure data is recent
-  while(micros()-lastP > 50000) heartBeat();
+  while(micros()-lastT > 50000 || lastT == 0) heartBeat(); // Make sure data is recent
+  while(micros()-lastP > 50000 || lastP == 0) heartBeat();
   UT = rawT;
   UP = rawP;
 
