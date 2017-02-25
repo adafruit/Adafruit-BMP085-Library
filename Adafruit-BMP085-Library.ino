@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include <Adafruit_BMP085.h>
+#include "Adafruit_BMP085.h"    // quotes look locally first to avoid clashes
 
 /*************************************************** 
   This is an example for the BMP085 Barometric Pressure & Temp Sensor
@@ -35,6 +35,15 @@ void setup() {
 }
   
 void loop() {
+  static unsigned long last = 0;
+  static unsigned long cnt = 0;
+  bmp.heartBeat();
+  cnt++;
+  if(micros() - last > 1000000L){
+    last = micros();
+    Serial.print(cnt);
+    Serial.print(" times round the loop since last print.\n");
+    cnt = 0;
     Serial.print("Temperature = ");
     Serial.print(bmp.readTemperature());
     Serial.println(" *C");
@@ -62,5 +71,5 @@ void loop() {
     Serial.println(" meters");
     
     Serial.println();
-    delay(500);
+  }
 }
