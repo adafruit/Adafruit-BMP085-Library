@@ -69,7 +69,7 @@ void Adafruit_BMP085::heartBeat(void) {        // Call when convenient to update
   // incorporates functionality of readRawPressure() and readRawTemperature() to rawT and rawP current
   static byte pending = 0;                     // defines state, nothing, waiting for T, waiting for P
   if(pending == 0){                            // if nothing else going on
-    if(micros()-lastT > 50000){                // update T every 20th of a second
+    if(micros()-lastT > 50000 || lastT == 0){  // update T every 20th of a second
       write8(BMP085_CONTROL, BMP085_READTEMPCMD);
       pending = 1;                  // waiting for temperature when pending = 1
       lastT = micros();
