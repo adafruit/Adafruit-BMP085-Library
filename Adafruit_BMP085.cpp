@@ -22,11 +22,18 @@ Adafruit_BMP085::Adafruit_BMP085() {
 
 
 boolean Adafruit_BMP085::begin(uint8_t mode) {
+    return begin(0, 0, mode);
+}
+
+boolean Adafruit_BMP085::begin(uint8_t sda_pin, uint8_t scl_pin, uint8_t mode) {
   if (mode > BMP085_ULTRAHIGHRES) 
     mode = BMP085_ULTRAHIGHRES;
   oversampling = mode;
 
-  Wire.begin();
+  if (sda_pin == 0)
+      Wire.begin();
+  else
+      Wire.begin(sda_pin, scl_pin);
 
   if (read8(0xD0) != 0x55) return false;
 
