@@ -1,3 +1,5 @@
+# Adafruit BMP085 Library [![Build Status](https://github.com/adafruit/Adafruit-BMP085-Library/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit-BMP085-Library/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit-BMP085-Library/html/index.html)
+
 This is a library for the Adafruit BMP085/BMP180 Barometric Pressure + Temp sensor
 
 Designed specifically to work with the Adafruit BMP085 or BMP180 Breakout 
