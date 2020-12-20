@@ -21,7 +21,7 @@
 #ifndef ADAFRUIT_BMP085_H
 #define ADAFRUIT_BMP085_H
 
-#if (ARDUINO >= 100)
+#if !defined(ARDUINO) || (ARDUINO >= 100)
 #include "Arduino.h"
 #else
 #include "WProgram.h"
