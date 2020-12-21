@@ -31,14 +31,14 @@
 #include "Adafruit_BMP085.h"
 #include <Adafruit_I2CDevice.h>
 
-Adafruit_BMP085::Adafruit_BMP085() : i2c_dev (BMP085_I2CADDR) {}
+Adafruit_BMP085::Adafruit_BMP085() : i2c_dev(BMP085_I2CADDR) {}
 
 bool Adafruit_BMP085::begin(uint8_t mode) {
   if (mode > BMP085_ULTRAHIGHRES)
     mode = BMP085_ULTRAHIGHRES;
   oversampling = mode;
 
-  if (! i2c_dev.begin()) {
+  if (!i2c_dev.begin()) {
     return false;
   }
 
@@ -289,7 +289,8 @@ uint16_t Adafruit_BMP085::read16(uint8_t a) {
   uint16_t ret;
 
   // send 1 byte, reset i2c, read 2 bytes
-  // we could typecast uint16_t as uint8_t array but would need to ensure proper endianness
+  // we could typecast uint16_t as uint8_t array but would need to ensure proper
+  // endianness
   i2c_dev.write_then_read(&a, 1, retbuf, 2, true);
 
   // write_then_read uses uint8_t array
