@@ -21,6 +21,7 @@
 #ifndef ADAFRUIT_BMP085_H
 #define ADAFRUIT_BMP085_H
 
+#include <Arduino.h>
 #include <Adafruit_I2CDevice.h>
 
 #define BMP085_DEBUG 0 //!< Debug mode
