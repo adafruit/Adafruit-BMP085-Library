@@ -26,7 +26,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include "Wire.h"
+#include <Adafruit_I2CDevice.h>
 
 #define BMP085_DEBUG 0 //!< Debug mode
 
