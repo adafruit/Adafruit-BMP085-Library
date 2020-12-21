@@ -73,9 +73,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5e62c9ea6eb8a1307976d4eb2826b596"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___b_m_p085.html#a5e62c9ea6eb8a1307976d4eb2826b596">begin</a> (uint8_t mode=<a class="el" href="_adafruit___b_m_p085_8h.html#a14b4a4e4e4ed92c62576d50f1c2ce770">BMP085_ULTRAHIGHRES</a>)</td></tr>
-<tr class="memdesc:a5e62c9ea6eb8a1307976d4eb2826b596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts I2C connection.  <a href="#a5e62c9ea6eb8a1307976d4eb2826b596">More...</a><br /></td></tr>
-<tr class="separator:a5e62c9ea6eb8a1307976d4eb2826b596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4589d47f1d81d9cce6e1309c3117d519"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___b_m_p085.html#a4589d47f1d81d9cce6e1309c3117d519">begin</a> (uint8_t mode=<a class="el" href="_adafruit___b_m_p085_8h.html#a14b4a4e4e4ed92c62576d50f1c2ce770">BMP085_ULTRAHIGHRES</a>, TwoWire *wire=&amp;Wire)</td></tr>
+<tr class="memdesc:a4589d47f1d81d9cce6e1309c3117d519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts I2C connection.  <a href="#a4589d47f1d81d9cce6e1309c3117d519">More...</a><br /></td></tr>
+<tr class="separator:a4589d47f1d81d9cce6e1309c3117d519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52bb46b412e96d8f58f60255894fc5ad"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___b_m_p085.html#a52bb46b412e96d8f58f60255894fc5ad">readTemperature</a> (void)</td></tr>
 <tr class="memdesc:a52bb46b412e96d8f58f60255894fc5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the temperature over I2C from the BMP085.  <a href="#a52bb46b412e96d8f58f60255894fc5ad">More...</a><br /></td></tr>
 <tr class="separator:a52bb46b412e96d8f58f60255894fc5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,8 +98,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main BMP085 class. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5e62c9ea6eb8a1307976d4eb2826b596"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e62c9ea6eb8a1307976d4eb2826b596">&#9670;&nbsp;</a></span>begin()</h2>
+<a id="a4589d47f1d81d9cce6e1309c3117d519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4589d47f1d81d9cce6e1309c3117d519">&#9670;&nbsp;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -108,8 +108,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">bool Adafruit_BMP085::begin </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>mode</em> = <code><a class="el" href="_adafruit___b_m_p085_8h.html#a14b4a4e4e4ed92c62576d50f1c2ce770">BMP085_ULTRAHIGHRES</a></code></td><td>)</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="_adafruit___b_m_p085_8h.html#a14b4a4e4e4ed92c62576d50f1c2ce770">BMP085_ULTRAHIGHRES</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">TwoWire *&#160;</td>
+          <td class="paramname"><em>wire</em> = <code>&amp;Wire</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -118,6 +128,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mode</td><td>Mode to set, ultra high-res by default </td></tr>
+    <tr><td class="paramname">wire</td><td>The I2C interface to use, defaults to Wire </td></tr>
   </table>
   </dd>
 </dl>
