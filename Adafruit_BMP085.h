@@ -21,11 +21,6 @@
 #ifndef ADAFRUIT_BMP085_H
 #define ADAFRUIT_BMP085_H
 
-#if !defined(ARDUINO) || (ARDUINO >= 100)
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
 #include <Adafruit_I2CDevice.h>
 
 #define BMP085_DEBUG 0 //!< Debug mode
@@ -65,7 +60,7 @@ public:
    * @param mode Mode to set, ultra high-res by default
    * @return Returns true if successful
    */
-  boolean begin(uint8_t mode = BMP085_ULTRAHIGHRES);
+  bool begin(uint8_t mode = BMP085_ULTRAHIGHRES);
   /*!
    * @brief Gets the temperature over I2C from the BMP085
    * @return Returns the temperature

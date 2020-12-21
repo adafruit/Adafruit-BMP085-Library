@@ -33,12 +33,14 @@
 
 Adafruit_BMP085::Adafruit_BMP085() : i2c_dev (BMP085_I2CADDR) {}
 
-boolean Adafruit_BMP085::begin(uint8_t mode) {
+bool Adafruit_BMP085::begin(uint8_t mode) {
   if (mode > BMP085_ULTRAHIGHRES)
     mode = BMP085_ULTRAHIGHRES;
   oversampling = mode;
 
-  i2c_dev.begin();
+  if (! i2c_dev.begin()) {
+    return false;
+  }
 
   if (read8(0xD0) != 0x55)
     return false;
