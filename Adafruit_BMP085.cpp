@@ -31,8 +31,7 @@
 #include "Adafruit_BMP085.h"
 #include <Adafruit_I2CDevice.h>
 
-Adafruit_I2CDevice i2c_dev = Adafruit_I2CDevice(BMP085_I2CADDR);
-Adafruit_BMP085::Adafruit_BMP085() {}
+Adafruit_BMP085::Adafruit_BMP085() : i2c_dev (BMP085_I2CADDR) {}
 
 boolean Adafruit_BMP085::begin(uint8_t mode) {
   if (mode > BMP085_ULTRAHIGHRES)

@@ -105,6 +105,7 @@ private:
   uint16_t read16(uint8_t addr);
   void write8(uint8_t addr, uint8_t data);
 
+  Adafruit_I2CDevice i2c_dev;
   uint8_t oversampling;
 
   int16_t ac1, ac2, ac3, b1, b2, mb, mc, md;
