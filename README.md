@@ -13,6 +13,8 @@ products from Adafruit!
 
 Check out the links above for our tutorials and wiring diagrams
 
+Requires the https://github.com/adafruit/Adafruit_BusIO library for I2C abstraction
+
 Adafruit invests time and resources providing this open source code,
 please support Adafruit and open-source hardware by purchasing
 products from Adafruit!
