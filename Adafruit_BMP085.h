@@ -87,12 +87,12 @@ public:
   float readAltitude(float sealevelPressure = 101325); // std atmosphere
   /*!
    * @brief Reads the raw temperature
-   * @return Returns signed 16-bit integer of the raw temperature
+   * @return Returns the raw temperature
    */
   uint16_t readRawTemperature(void);
   /*!
    * @brief Reads the raw pressure
-   * @return Returns signed 32-bit integer of the raw temperature
+   * @return Returns the raw pressure
    */
   uint32_t readRawPressure(void);
 
