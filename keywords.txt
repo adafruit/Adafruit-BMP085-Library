@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map For BMP085
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Adafruit_BMP085	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+readPressure	KEYWORD2
+readTemperature   	KEYWORD2
+readAltitude    KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+computeB5	KEYWORD2
+readRawPressure	KEYWORD2
+readRawTemperature	KEYWORD2
+readSealevelPressure    KEYWORD2
+
+
